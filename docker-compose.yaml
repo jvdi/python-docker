@@ -1,0 +1,11 @@
+version: '3'
+services:
+  acc-man:
+    image: javidi/python-docker:latest
+    container_name: app-test
+    ports:
+      - 5000:5000
+    restart: unless-stopped
+    volumes:
+      - ./data/src:/app
+      - ./data/supervisord.conf:/etc/supervisord.conf
