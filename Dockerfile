@@ -10,9 +10,9 @@ RUN set -xe \
 
 RUN mkdir -p /app
 
-ENV TZ=UTC
-RUN cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["supervisord"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["--nodaemon", "--configuration", "/etc/supervisord.conf"]
