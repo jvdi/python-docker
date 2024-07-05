@@ -1,8 +1,8 @@
 version: '3'
 services:
-  acc-man:
+  python-app:
     image: javidi/python-docker:latest
-    container_name: app-test
+    container_name: python-app
     ports:
       - 5000:5000
     restart: unless-stopped

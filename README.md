@@ -5,7 +5,7 @@ this file is need for run:
 ── data
    ├── src
    │   ├── main.py
-   │   └── requirements.txt
+   │   └── requirements.txt (OPTIONAL - IF NEED => CREATE)
    └── supervisord.conf
 ```
 supervisor.conf:
@@ -24,13 +24,7 @@ serverurl=unix:///tmp/supervisor.sock
 [rpcinterface:supervisor]
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
-[program:install_python_requirements]
-directory=/app
-command=/bin/sh -c "pip install --no-cache-dir -r requirements.txt"
-autostart=true
-autorestart=false
-
-[program:src-python]
+[program:python-app]
 directory=/app
 command=python3 /app/main.py
 autostart=true
@@ -41,9 +35,9 @@ run with docker compose:
 ```
 version: '3'
 services:
-  acc-man:
+  python-app:
     image: javidi/python-docker:latest
-    container_name: app-test
+    container_name: python-app
     ports:
       - 5000:5000
     restart: unless-stopped
